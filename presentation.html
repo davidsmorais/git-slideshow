@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>Git 101</title>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/schacon/git-scm/master/source/favicon.ico" />
     <meta charset="utf-8">
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Barriecito&display=swap);
+      @import url(https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap);
       @import url(https://fonts.googleapis.com/css?family=Roboto:400,700,400italic);
       @import url(https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700&display=swap);
 
@@ -23,7 +24,7 @@
         background-color: #141422;
       }
       h1, h2, h3 {
-        font-family: 'Barriecito';
+        font-family: 'Rubik Mono One', sans-serif;
         font-weight: normal;
       }
       .remark-code, .remark-inline-code { font-family: 'Fira Mono'; }
@@ -33,20 +34,40 @@
     <textarea id="source">
 
 class: center, middle
+title: Git 101
 
-# Title
-
----
-
-# Agenda
-
-1. Introduction
-2. Deep-dive
-3. ...
+# Git 101
 
 ---
 
-# Introduction
+# Topics
+
+  - What is Git
+      - Git vs Other Source Control
+  - Git Workflow
+    - Initializing/Cloning
+    - Remotes
+    - Rebase vs Merge Workflow
+  - Git Commands
+  - Git GUI's
+  - Questions
+
+---
+
+# What is Git ?
+
+- Git is a Distributed Version Control Systems (DVCS), much like Mercurial or SVN.
+  - It is used for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.
+  - It is free and open source.
+
+## How does it work ?
+- Git basically tracks the history of file changes.
+- Whenever we want to save a 'snapshot' of our code, we do a *commit* in a *repository*.
+- When we commit, git saves the changes that were applied to the original file. (not the actual file)
+- All git operations are kept in your machine for a determinate time and a complete history of a reposit
+
+
+
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
