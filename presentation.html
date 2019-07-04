@@ -23,6 +23,10 @@
       .remark-slide > div {
         background-color: #141422;
       }
+      .remark-inline-code {
+        background-color: #99E5DC;
+        padding: 2px;
+      }
       h1, h2, h3 {
         font-family: 'Rubik Mono One', sans-serif;
         font-weight: normal;
@@ -57,14 +61,21 @@ title: Git 101
 # What is Git ?
 
 - Git is a Distributed Version Control Systems (DVCS), much like Mercurial or SVN.
-  - It is used for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.
-  - It is free and open source.
+  - Due to its distributed nature, it allows users to work offline and always keep a copy of a repo's history in their machine.
+- It is used for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.
+- It is free and open source.
+  ![Centralized vs Distributed](http://1.bp.blogspot.com/-e47rFnZpPjY/Vnl4O9KMwuI/AAAAAAAAEIU/mK3le2R_HOk/s1600/2-comparison.PNG)
+---
 
 ## How does it work ?
 - Git basically tracks the history of file changes.
-- Whenever we want to save a 'snapshot' of our code, we do a *commit* in a *repository*.
-- When we commit, git saves the changes that were applied to the original file. (not the actual file)
-- All git operations are kept in your machine for a determinate time and a complete history of a reposit
+- Whenever we want to save a 'snapshot' of our code, we do a `commit` in a *repository*.
+  - When we commit, git saves the changes that were applied to the original file. (not the actual file)
+- All git operations are kept in your machine for a certain amount of time and are available through `git reflog`
+  - *Due to this, it is very hard to permanently delete your work*
+
+---
+
 
 
 
