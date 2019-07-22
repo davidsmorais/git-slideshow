@@ -2,20 +2,26 @@
 <html>
   <head>
     <title>Git 101</title>
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/schacon/git-scm/master/source/favicon.ico" />
-    <meta charset="utf-8">
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/schacon/git-scm/master/source/favicon.ico"
+    />
+    <meta charset="utf-8" />
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap);
-      @import url(https://fonts.googleapis.com/css?family=Roboto:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700&display=swap);
+      @import url("https://fonts.googleapis.com/css?family=Roboto|Shadows+Into+Light&display=swap");
+      @import url(
+        https://fonts.googleapis.com/css?family=Fira+Mono:400,
+        500,
+        700&display=swap
+      );
 
       body {
-        font-family: 'Roboto';
+        font-family: "Roboto", sans-serif;
         background-color: #141422;
-        color: #20968B;
+        color: #20968b;
       }
       .remark-slide-container {
-        background-image: linear-gradient(to right, #141422, #20968B);
+        background-image: linear-gradient(to right, #141422, #20968b);
       }
       .remark-slide-scaler {
         box-shadow: 0 0 30px #2cc2b3af;
@@ -24,14 +30,34 @@
         background-color: #141422;
       }
       .remark-inline-code {
-        background-color: #99E5DC;
+        background-color: #99e5dc;
         padding: 2px;
       }
-      h1, h2, h3 {
-        font-family: 'Rubik Mono One', sans-serif;
+      img {
+        margin: 0 auto;
+        display: block;
+        max-height: 20vh;
+      }
+      td {
+        border-bottom: 1px solid;
+      }
+      th {
+        border-bottom: 2px dotted;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0 auto;
+        width: fit-content;
+        font-family: "Shadows Into Light", cursive;
         font-weight: normal;
       }
-      .remark-code, .remark-inline-code { font-family: 'Fira Mono'; }
+      h4 {
+        margin: 0 auto;
+        width: fit-content;
+        font-size: 1.5em;
+        color: #32fbe8;
+      }
     </style>
   </head>
   <body>
@@ -47,42 +73,130 @@ title: Git 101
 # Topics
 
   - What is Git
-      - Git vs Other Source Control
-  - Git Workflow
-    - Initializing/Cloning
-    - Remotes
-    - Rebase vs Merge Workflow
-  - Git Commands
+  - Git Workflows
+  - Cool Git Commands
   - Git GUI's
   - Questions
 
 ---
-
-# What is Git ?
-
+# Git 101
+## What is Git ?
 - Git is a Distributed Version Control Systems (DVCS), much like Mercurial or SVN.
   - Due to its distributed nature, it allows users to work offline and always keep a copy of a repo's history in their machine.
 - It is used for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.
 - It is free and open source.
-  ![Centralized vs Distributed](http://1.bp.blogspot.com/-e47rFnZpPjY/Vnl4O9KMwuI/AAAAAAAAEIU/mK3le2R_HOk/s1600/2-comparison.PNG)
----
 
+![Centralized vs Distributed](http://1.bp.blogspot.com/-e47rFnZpPjY/Vnl4O9KMwuI/AAAAAAAAEIU/mK3le2R_HOk/s1600/2-comparison.PNG)
+---
+# Git 101
 ## How does it work ?
 - Git basically tracks the history of file changes.
 - Whenever we want to save a 'snapshot' of our code, we do a `commit` in a *repository*.
   - When we commit, git saves the changes that were applied to the original file. (not the actual file)
 - All git operations are kept in your machine for a certain amount of time and are available through `git reflog`
   - *Due to this, it is very hard to permanently delete your work*
-
 ---
+# Git Workflows
+## Basic Workflow
+![Basic git flow](https://buddy.works/blog/images/basic.png)
+### Commands used
+- `git init` / `git clone`
+- `git add`
+- `git commit -m "COMMIT MSG"`
+- `git push origin BRANCH_NAME "COMMIT MSG"`
+---
+# Git Workflows
+## Basic Workflow
+### Description
+The idea is simple: there is one central repository.
+Each developer clones the repo, works locally on the code, makes a commit with changes, and push it to the central repository for other developers to pull and use in their work.
+- The basic workflow can work fine if you're the only developer working on a project at a given time.
+- Issues arise if 2 developers do changes to the code and push their code at the same time.
+- Developers can align between them when each pushes the changes. Keeping the commits in a single branch.
+- Enter feature branch workflow
+---
+# Git Workflows
+## Feature Branch Workflow
+![Feature branch workflow](https://buddy.works/blog/images/feature-branch.png)
+### Commands used
+- `git checkout -b "NEW BRANCH NAME"`
+- `git checkout "BRANCH NAME"`
+- `git merge "NEW BRANCH NAME"`
+---
+# Git Workflows
+## Feature Branch Workflow
+### Description
+- For each new functionality, a new  branch should be created.
+- This new branch will be where we develop and test a new feature.
+- Once the feature is done, the branch is merged/rebased onto the master branch.
+- This ensures the developers can work simutaneously in two different functionalities and merge them whenever without having to align timings.
+---
+# Git Workflows
+## Rebase vs Merge
+![Rebase vs Merge](https://miro.medium.com/max/875/1*pzT4KMiZDOFsMOKH-cJjfQ.png)
+- `git rebase` solves the same problem as `git merge`. Both of these commands are designed to integrate changes from one branch into another branch—they just do it in very different ways.
 
+| Merge | Rebase |
+| -------- | -------- |
+|1 Merge Commit|No extraneous commits|
+|Non-desctructive operation|Re-writes commit history|
+|Commit history are in feature branches|Single line branch with all commits|
+---
+# Git Workflows
+## Golden Rule of Rebasing
+**There are two trade-offs for the pristine commit history the rebase workflow provides: safety and traceability.**
+#### The golden rule of git rebase is to never use it on public branches.
+- The rebase moves all of the commits in master onto the tip of feature.
+- The problem is that this only happened in your repository.
+- All of the other developers are still working with the original master.
+- Since rebasing results in brand new commits, Git will think that your master branch’s history has diverged from everybody else’s.
+- You will need to **Force Push**
+---
+# Git Workflows
+## Force Push
+- If you try to push the rebased branch back to a remote repository, Git will prevent you from doing so because it conflicts with the remote branch. *only appliable if you did pushes in-between commits*
+- But, you can force the push to go through like so:
 
+`git push origin <BRANCH> -f` OR `git push origin <BRANCH> --force`
+- This overwrites the remote branch to match the rebased one from your repository. So, be very careful to use this command only when you know exactly what you’re doing.
+- `git pull --rebase` does a pull but rewinds your local commits on top of the target branch
+---
+# Cool Git Commands
+|Command|Result|
+|------ | ----- |
+|`git commit --amend --no-edit` | Ammends without editing the previous commit msg|
+|`git fetch origin && git rebase origin/master`|Fetches the main branch and winds your changes on top of it|
+|`git log -1`|Shows last commit|
+|`git checkout <COMMIT_SHA> -- <PATH_TO_FILE>`|Resets a file to the state it was in the previous commit|
+|`git cherry-pick <COMMIT_SHA>`|Cherrypick a single commit|
+| `git cherry-pick <FIRST_COMMIT_SHA>..<LAST_COMMIT_SHA>`| Cherrypick a range of commits|
+---
+# Cool Git Commands
+|Command|Result|
+|------ | ----- |
+|`git config --global credential.helper 'cache --timeout 43200'`|Save your HTTPS credentials for 24hours|
+|`git commit —amend —no-edit && git push origin`| Quick ammend and push to origin|
+|`git reset HEAD`|Unstage current changes|
+## Change default git editor
+`git config --global core.editor "'C:\Program Files (x86)\Microsoft VS Code\code.exe' -w"`
+## Purge merged branches
+`git checkout <BRANCH_NAME> && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d`
+---
+# Git GUI's
+- `gitk`
+- Gitkraken
+- Sourcetree
+- Fork
+- Tortoise Git
+- Git Cola
+---
+# Questions
+![404](https://cdn1.iconfinder.com/data/icons/internet-technology-and-security-2/128/77-512.png)
+#### Doubts not found
 
-
-
-    </textarea>
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
-    </script>
+</textarea
+    >
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
     <script>
       var slideshow = remark.create();
     </script>
