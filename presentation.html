@@ -66,7 +66,9 @@
 class: center, middle
 title: Git 101
 
-# Git 101
+# Git 101*
+# ONE-O-ONE*
+# for dummies*
 
 ---
 
@@ -119,6 +121,7 @@ Each developer clones the repo, works locally on the code, makes a commit with c
 ## Feature Branch Workflow
 ![Feature branch workflow](https://buddy.works/blog/images/feature-branch.png)
 ### Commands used
+- `git fetch origin`
 - `git checkout -b "NEW BRANCH NAME"`
 - `git checkout "BRANCH NAME"`
 - `git merge "NEW BRANCH NAME"`
@@ -177,10 +180,12 @@ Each developer clones the repo, works locally on the code, makes a commit with c
 |`git config --global credential.helper 'cache --timeout 43200'`|Save your HTTPS credentials for 24hours|
 |`git commit —amend —no-edit && git push origin`| Quick ammend and push to origin|
 |`git reset HEAD`|Unstage current changes|
-## Change default git editor
+### Change default git editor
 `git config --global core.editor "'C:\Program Files (x86)\Microsoft VS Code\code.exe' -w"`
-## Purge merged branches
+### Purge merged branches
 `git checkout <BRANCH_NAME> && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d`
+### Panic Button
+`git reflog`
 ---
 # Git GUI's
 - `gitk`
